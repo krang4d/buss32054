@@ -11,7 +11,9 @@ INCLUDEPATH += .
 
 # Input
 SOURCES += main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    centerwidget.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    centerwidget.h

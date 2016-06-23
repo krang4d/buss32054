@@ -1,13 +1,10 @@
-#include <QtGui>
-#include <QTextCodec>
-#include <QMenuBar>
-#include <QMessageBox>
-
 #include "mainwindow.h"
 
 mainWindow::mainWindow(){
     QTextCodec *codec = QTextCodec::codecForName("UTF8");
     QTextCodec::setCodecForLocale(codec);
+
+    cw = new CenterWidget(this);
 
     aboutAction = new QAction(tr("&O программе"), this);
     aboutAction->setStatusTip(tr("Сведения о программе"));
@@ -35,38 +32,40 @@ mainWindow::mainWindow(){
     sb1->setText(tr("Привет!"));
 
     setMouseTracking(true);
+
+    setCentralWidget(cw);
+
 }
 
-void MainWindow::resizeEvent(QResizeEvent *event) {
+void mainWindow::resizeEvent(QResizeEvent *event) {
     QSize sz = event->size();
     sb2->setText(QString( "(%1, %2)" ).arg( sz.width() ).arg( sz.height() ) );
 }
 
-void MainWindow::mouseMoveEvent(QMouseEvent *event) {
+void mainWindow::mouseMoveEvent(QMouseEvent *event) {
     QPoint pos = event->pos();
-    sb3->setText(
-    QString( "%1, %2" ).arg( pos.x() ).arg( pos.y() ) );
+    sb3->setText(QString( "%1, %2" ).arg( pos.x() ).arg( pos.y() ) );
 }
 
- void MainWindow::about() {
+void mainWindow::about() {
     QMessageBox::about(
     this, tr("О программе"),
-    tr("<h2>Простое приложение Qt4</h2>"
- "<p>Окно с меню и строкой состояния"));
+    tr("<p><b>Назначение:</b> Программа предназначена для проверки модуля сопряжения МС-54.011 КИНД.468354.011 из состава блока БУСС-32.054"
+       "КИНД.468332.054 аппаратуры второго рабочего места КПА-166-09</p>"
+       "<p><b>Автор:</b> Головкин П.Г.</p>"));
  }
 
- bool MainWindow::askOnClose() {
-    int r = QMessageBox::question(
-    this, tr("Подтвердите"),
+bool mainWindow::askClose() {
+    int r = QMessageBox::question(this, tr("Подтвердите"),
     tr("Выйти из программы?"),
-    QMessageBox::Yes | QMessageBox::No,
-    QMessageBox::Yes,
-    QMessageBox::Cancel | QMessageBox::Escape);
+    QMessageBox::Yes | QMessageBox::No);
+    //QMessageBox::Yes,
+    //QMessageBox::Cancel | QMessageBox::Escape);
     return (r == QMessageBox::Yes);
 }
 
-void MainWindow::closeEvent(QCloseEvent *event) {
-    if (askOnClose()) {
+void mainWindow::closeEvent(QCloseEvent *event) {
+    if (askClose()) {
     event->accept();
     }
     else {

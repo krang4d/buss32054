@@ -4,6 +4,16 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <QMenu>
+#include <QtGui>
+#include <QTextCodec>
+#include <QMenuBar>
+#include <QMessageBox>
+#include <QStatusBar>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QPushButton>
+
+#include "centerwidget.h"
 
 class mainWindow : public QMainWindow
 {
@@ -27,6 +37,7 @@ private:
     QLabel *sb1;
     QLabel *sb2;
     QLabel *sb3;
+    CenterWidget *cw;
 
     bool askClose();
 
