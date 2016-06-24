@@ -21,6 +21,7 @@ class mainWindow : public QMainWindow
 
 public:
     explicit mainWindow();
+    void setNextLine(QString *);
 
 protected:
     virtual void resizeEvent(QResizeEvent *event);

@@ -30,11 +30,13 @@ mainWindow::mainWindow(){
     statusBar()->addWidget(sb3, 1);
 
     sb1->setText(tr("Привет!"));
-
     setMouseTracking(true);
 
     setCentralWidget(cw);
 
+}
+void mainWindow::setNextLine(QString *msg){
+    cw->setMessage(msg);
 }
 
 void mainWindow::resizeEvent(QResizeEvent *event) {

@@ -2,11 +2,15 @@
 
 CenterWidget::CenterWidget(QWidget *parent) : QWidget(parent)
 {
+    setupLayout();
+}
+
+void CenterWidget::setupLayout(){
     //Layout setup
     QVBoxLayout *masterLayout = new QVBoxLayout;
     MessageLabel = new QLabel(tr("Cообщения оператору"));
-    masterLayout->addWidget(MessageTextEdit);
-    MessageTextEdit = new QTextEdit(tr("<p>Начало проверки модуля МС-54.011</p>"));
+    masterLayout->addWidget(MessageLabel);
+    MessageTextEdit = new QTextEdit;
     masterLayout->addWidget(MessageTextEdit);
 
     QHBoxLayout *slaveLayout = new QHBoxLayout;
@@ -19,4 +23,11 @@ CenterWidget::CenterWidget(QWidget *parent) : QWidget(parent)
 
     masterLayout->addLayout(slaveLayout);
     setLayout(masterLayout);
+
+    qDebug() << QString("setupLayout()");
+}
+
+void CenterWidget::setMessage(QString *msg){
+    qDebug() << msg->toUtf8();
+    MessageTextEdit->setText(msg->toUtf8());
 }
